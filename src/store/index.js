@@ -61,7 +61,7 @@ export default new Vuex.Store({
         var str_ = selected.selected.toString()
         str_ = str_.replace(/\s/g, '/')
 
-        var state_ = state.states.find((e) => e.name == str_)
+        var state_ = state.states.find((a) => a.name == str_)
         console.log(state_,str_, state.states,"st")
         commit('SET_STATES', state_)
       }

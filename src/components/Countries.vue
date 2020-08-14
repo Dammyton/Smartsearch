@@ -16,7 +16,7 @@
         <div class="row">
           <div class="col-md-5 box1">
             <div>
-              <h3 class="title">An Amazing Country Directory App</h3>
+              <h3 class="title pt-3">An Amazing Country Directory App</h3>
               <p class="text">
                 Just a click away you get to see the list of all countries, their states and cities.
                 Interesting right?
@@ -24,7 +24,7 @@
               <a class="btn-rounded get_started" href="#steps">Get Started</a>
             </div>
           </div>
-          <div class="col-md-7 box2">
+          <div class="col-md-7 box2 pt-4">
             <img src="../assets/bg.png" class="img-fluid" alt />
           </div>
         </div>
@@ -34,64 +34,70 @@
     <!-- How It Works -->
     <div id="steps">
       <div class="steps mt-5 mb-5">
-      <div class="text-center mb-5">
-        <h3>How It Works</h3>
-        <hr class="border" />
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <div class="card py-4 px-4 text-center">
-              <div class="image_layer mb-4 mt-2">
-                <img src="../assets/1.png" class="icon" />
+        <div class="text-center mb-5">
+          <h3>How It Works</h3>
+          <hr class="border" />
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="card py-4 px-4 text-center">
+                <div class="image_layer mb-4 mt-2">
+                  <img src="../assets/1.png" class="icon" />
+                </div>
+                <h4>STEP 1</h4>
+                <p>
+                  Click on the input field for "Select Country". It will automatically
+                  populate the list of all countries. Feel free to select any country.
+                </p>
               </div>
-              <h4>STEP 1</h4>
-              <p>
-                Click on the input field for "Select Country". It will automatically
-                populate the list of all countries. Feel free to select any country.
-              </p>
             </div>
-          </div>
-          <div class="col">
-            <div class="card py-4 px-4 text-center">
-              <div class="image_layer mb-4 mt-2">
-                <img src="../assets/2.png" class="icon two" />
+            <div class="col">
+              <div class="card py-4 px-4 text-center">
+                <div class="image_layer mb-4 mt-2">
+                  <img src="../assets/2.png" class="icon two" />
+                </div>
+                <h4>STEP 2</h4>
+                <p>
+                  Click on the input field for "Select State".This will populate the
+                  respective states of the country you selected earlier. Select your favourite state.
+                </p>
               </div>
-              <h4>STEP 2</h4>
-              <p>
-                Click on the input field for "Select State".This will populate the
-                respective states of the country you selected earlier. Select your favourite state.
-              </p>
             </div>
-          </div>
-          <div class="col">
-            <div class="card py-4 px-4 text-center">
-              <div class="image_layer mb-4 mt-2">
-                <img src="../assets/3.png" class="icon pt-0" />
+            <div class="col">
+              <div class="card py-4 px-4 text-center">
+                <div class="image_layer mb-4 mt-2">
+                  <img src="../assets/3.png" class="icon pt-0" />
+                </div>
+                <h4>STEP 3</h4>
+                <p>
+                  Click on the input field for "Select City". Here you'll have the list of cities in a particular state.
+                  populate the list of all countries.
+                </p>
               </div>
-              <h4>STEP 3</h4>
-              <p>
-                Click on the input field for "Select City". Here you'll have the list of cities in a particular state.
-                populate the list of all countries.
-              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    </div>
 
     <!-- Let's Get Started -->
     <div class="start mb-5">
-      <div class="text-center mb-5">
+      <div class="text-center mb-3">
         <h3>Let's Get Started</h3>
         <hr class="border" />
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-md-4">
-            <label for="">Select Country</label>
-            <select class="form-control" v-model="selectedCountry" @change="selectCountry" name="countries" id="countries">
+          <div class="col-md-4 mt-2">
+            <label for>Select Country</label>
+            <select
+              class="form-control"
+              v-model="selectedCountry"
+              @change="selectCountry"
+              name="countries"
+              id="countries"
+            >
               <option
                 :value="country.name"
                 v-for="country in getCountries"
@@ -99,23 +105,50 @@
               >{{country.name}}</option>
             </select>
           </div>
-          <div class="col-md-4">
-            <label for="">Select State</label>
-            <select class="form-control" v-model="selectedState" @change="selectState" name="states" id="states">
+          <div class="col-md-4 mt-2">
+            <label for>Select State</label>
+            <select
+              class="form-control"
+              v-model="selectedState"
+              @change="selectState"
+              name="states"
+              id="states"
+            >
               <option :value="state.name" v-for="state in getStates" :key="state.id">{{state.name}}</option>
             </select>
+            <div
+              v-if="stateError"
+              :class="{ empty: stateError }"
+              class="alert alert-warning"
+              role="alert"
+            >This Country Has No States!</div>
           </div>
-          <div class="col-md-4">
-            <label for="">Select City</label>
+          <div class="col-md-4 mt-2">
+            <label for>Select City</label>
             <select class="form-control" v-model="selectedCity" name="cities" id="cities">
               <option :value="city.name" v-for="city in getCities" :key="city.id">{{city.name}}</option>
             </select>
+            <div
+              v-if="cityError"
+              :class="{ empty: cityError }"
+              class="alert alert-warning"
+              role="alert"
+            >This State Doesn't Have Any City!</div>
           </div>
         </div>
         <div class="mt-4 text-center">
-          <h4 class="selected_value" v-if="selectedCountry !== '' ">Selected Country: <span>{{selectedCountry}} </span></h4>
-          <h4 class="selected_value" v-if="selectedState !== '' ">Selected State: <span>{{selectedState}} </span></h4>
-          <h4 class="selected_value" v-if="selectedCity !== '' ">Selected City: <span>{{selectedCity}} </span></h4>
+          <h4 class="selected_value" v-if="selectedCountry !== '' ">
+            Selected Country:
+            <span>{{selectedCountry}}</span>
+          </h4>
+          <h4 class="selected_value" v-if="selectedState !== '' ">
+            Selected State:
+            <span>{{selectedState}}</span>
+          </h4>
+          <h4 class="selected_value" v-if="selectedCity !== '' ">
+            Selected City:
+            <span>{{selectedCity}}</span>
+          </h4>
         </div>
       </div>
     </div>
@@ -153,10 +186,12 @@ export default {
   name: "Countries",
   data() {
     return {
-      selectedCountry: '',
-      selectedState: '',
-      selectedCity: '',
-    }
+      selectedCountry: "",
+      selectedState: "",
+      selectedCity: "",
+      stateError: false,
+      cityError: false,
+    };
   },
   created() {
     this.$store.dispatch("loadCountries");
@@ -167,9 +202,20 @@ export default {
   methods: {
     selectCountry(e) {
       this.$store.dispatch("selectCountry", { selected: e.target.value });
+      // console.log(this.getStates.length, 'state length')
+      if (this.getStates.length === 0) {
+        this.stateError = !this.stateError;
+      } else {
+        this.stateError = false;
+      }
     },
-    selectState(e) {
-      this.$store.dispatch("selectState", { selected: e.target.value });
+    selectState(a) {
+      this.$store.dispatch("selectState", { selected: a.target.value });
+      if (this.getCities.length === 0) {
+        this.stateError = !this.stateError;
+      } else {
+        this.stateError = false;
+      }
     },
   },
 };
@@ -275,24 +321,24 @@ hr.border {
   font-family: auto;
   font-weight: 600;
 }
-.selected_value{
+.selected_value {
   color: #2f2e41;
   font-weight: 700;
 }
-.selected_value span{
+.selected_value span {
   color: #2f2e41;
   font-weight: 500;
 }
 
-@media screen and (max-width: 780px){
-.box2 {
+@media screen and (max-width: 780px) {
+  .box2 {
     order: 1;
-}
-.box1{
-  order: 2
-}
-h3.title{
-  font-size: 32px;
-}
+  }
+  .box1 {
+    order: 2;
+  }
+  h3.title {
+    font-size: 32px;
+  }
 }
 </style>
