@@ -52,7 +52,7 @@ export default new Vuex.Store({
         var str = selected.selected.toString()
         str = str.replace(/\s/g, '/')
 
-        var country = state.countries.find((e) => e.id == str)
+        var country = state.countries.find((e) => e.name == str)
         commit('SET_COUNTRIES', country)
       }
     },
@@ -61,7 +61,7 @@ export default new Vuex.Store({
         var str_ = selected.selected.toString()
         str_ = str_.replace(/\s/g, '/')
 
-        var state_ = state.states.find((e) => e.id == str_)
+        var state_ = state.states.find((e) => e.name == str_)
         console.log(state_,str_, state.states,"st")
         commit('SET_STATES', state_)
       }

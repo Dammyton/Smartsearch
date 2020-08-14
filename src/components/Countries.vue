@@ -83,13 +83,13 @@
 
     <!-- Let's Get Started -->
     <div class="start mb-5">
-      <div class="text-center mb-3">
+      <div class="text-center mb-5">
         <h3>Let's Get Started</h3>
         <hr class="border" />
       </div>
       <div class="container">
         <div class="row">
-          <div class="col-md-4 mt-2">
+          <div class="col-md-4">
             <label for="">Select Country</label>
             <select class="form-control" v-model="selectedCountry" @change="selectCountry" name="countries" id="countries">
               <option
@@ -99,29 +99,23 @@
               >{{country.name}}</option>
             </select>
           </div>
-          <div class="col-md-4 mt-2">
+          <div class="col-md-4">
             <label for="">Select State</label>
             <select class="form-control" v-model="selectedState" @change="selectState" name="states" id="states">
               <option :value="state.name" v-for="state in getStates" :key="state.id">{{state.name}}</option>
             </select>
-             <div v-if="stateError" :class="{ empty: stateError }" class="alert alert-warning" role="alert">
-              This Country Has No States!
-            </div>
           </div>
-          <div class="col-md-4 mt-2">
+          <div class="col-md-4">
             <label for="">Select City</label>
             <select class="form-control" v-model="selectedCity" name="cities" id="cities">
               <option :value="city.name" v-for="city in getCities" :key="city.id">{{city.name}}</option>
             </select>
-          <div  v-if="cityError" :class="{ empty: cityError }" class="alert alert-warning" role="alert">
-            This State Doesn't Have Any City!
-          </div>
           </div>
         </div>
         <div class="mt-4 text-center">
-          <h4 class="selected_value" v-if="selectedCountry">Selected Country: <span>{{selectedCountry}} </span></h4>
-          <h4 class="selected_value" v-if="selectedState">Selected State: <span>{{selectedState}} </span></h4>
-          <h4 class="selected_value" v-if="selectedCity">Selected City: <span>{{selectedCity}} </span></h4>
+          <h4 class="selected_value" v-if="selectedCountry !== '' ">Selected Country: <span>{{selectedCountry}} </span></h4>
+          <h4 class="selected_value" v-if="selectedState !== '' ">Selected State: <span>{{selectedState}} </span></h4>
+          <h4 class="selected_value" v-if="selectedCity !== '' ">Selected City: <span>{{selectedCity}} </span></h4>
         </div>
       </div>
     </div>
@@ -162,8 +156,6 @@ export default {
       selectedCountry: '',
       selectedState: '',
       selectedCity: '',
-      stateError: false,
-      cityError: false,
     }
   },
   created() {
@@ -295,7 +287,6 @@ hr.border {
 @media screen and (max-width: 780px){
 .box2 {
     order: 1;
-    margin-top: 40px;
 }
 .box1{
   order: 2
