@@ -212,9 +212,9 @@ export default {
     selectState(a) {
       this.$store.dispatch("selectState", { selected: a.target.value });
       if (this.getCities.length === 0) {
-        this.stateError = !this.stateError;
+        this.cityError = !this.cityError;
       } else {
-        this.stateError = false;
+        this.cityError = false;
       }
     },
   },
