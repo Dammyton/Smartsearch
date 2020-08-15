@@ -56,10 +56,10 @@ export default new Vuex.Store({
         commit('SET_COUNTRIES', country)
       }
     },
-    selectState({ commit, state }, selected) {
-      if (selected) {
-        var str_ = selected.selected.toString()
-        str_ = str_.replace(/\s/g, '/')
+    selectState({ commit, state }, selected_) {
+      if (selected_) {
+        var str_ = selected_.selected_.toString()
+        // str_ = str_.replace(/\s/g, '/')
 
         var state_ = state.states.find((a) => a.name == str_)
         console.log(state_,str_, state.states,"st")

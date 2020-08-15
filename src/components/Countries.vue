@@ -125,7 +125,8 @@
           </div>
           <div class="col-md-4 mt-2">
             <label for>Select City</label>
-            <select class="form-control" v-model="selectedCity" name="cities" id="cities">
+            <select 
+              v-model="selectedCity" class="form-control"  name="cities" id="cities">
               <option :value="city.name" v-for="city in getCities" :key="city.id">{{city.name}}</option>
             </select>
             <div
@@ -141,11 +142,11 @@
             Selected Country:
             <span>{{selectedCountry}}</span>
           </h4>
-          <h4 class="selected_value" v-if="selectedState !== '' ">
+          <h4 class="selected_value" v-if="selectedState">
             Selected State:
             <span>{{selectedState}}</span>
           </h4>
-          <h4 class="selected_value" v-if="selectedCity !== '' ">
+          <h4 class="selected_value" v-if="selectedCity">
             Selected City:
             <span>{{selectedCity}}</span>
           </h4>
@@ -186,9 +187,9 @@ export default {
   name: "Countries",
   data() {
     return {
-      selectedCountry: "",
-      selectedState: "",
-      selectedCity: "",
+      selectedCountry: '',
+      selectedState: '',
+      selectedCity: '',
       stateError: false,
       cityError: false,
     };
@@ -210,7 +211,7 @@ export default {
       }
     },
     selectState(a) {
-      this.$store.dispatch("selectState", { selected: a.target.value });
+      this.$store.dispatch("selectState", { selected_: a.target.value });
       if (this.getCities.length === 0) {
         this.cityError = !this.cityError;
       } else {
